@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Company Directory</title>
+  <style>
+    :root{
+      --navy:#0F2A44;
+      --mint:#2ED3C6;
+      --bg:#F6F8FB;
+      --card:#FFFFFF;
+      --soft:#EAF9F7;
+      --border:#E6EDF5;
+      --text:#334155;
+      --muted:#5F6B7A;
+      --shadow:0 10px 28px rgba(15,42,68,.10);
+      --radius:16px;
+      --max:1180px;
+      --font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);font-family:var(--font);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+
+    /* Header */
+    .topbar{
+      background:var(--navy);
+      color:#fff;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .topbar .inner{
+      max-width:var(--max);margin:0 auto;padding:14px 16px;
+      display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap;
+      min-height:71px;
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand h1{margin:0;font-size:20px}
+    .sub{font-size:13px;color:#CFE7F5;margin-top:7px;}
+    .brandText{display:flex;flex-direction:column;line-height:1.1;}
+    .kitaLogoClip{
+      height:33px;
+      width:52px;
+      overflow:hidden;
+      display:block;
+    }
+    .kitaLogo{
+      height:33px;
+      width:130px;
+      display:block;
+      object-fit:contain;
+    }
+
+    /* Controls */
+    .wrap{max-width:var(--max);margin:0 auto;padding:18px 16px 36px}
+    .controls{
+      background:#fff;border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+    }
+    .controlLeft,.controlRight{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .input, select{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:14px;outline:none;
+      min-width:350px;
+    }
+    select{min-width:190px}
+    .btn{
+      border:0;cursor:pointer;
+      background:var(--mint);color:var(--navy);
+      font-weight:900;
+      padding:10px 14px;border-radius:12px;
+      box-shadow:0 8px 18px rgba(46,211,198,.22);
+      text-decoration:none;
+      display:inline-flex;gap:8px;align-items:center;
+      white-space:nowrap;
+    }
+    select{
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+
+      padding-right:44px;
+      cursor:pointer;
+
+      background-color:#fff;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--navy) 50%),
+        linear-gradient(135deg, var(--navy) 50%, transparent 50%);
+      background-position:
+        calc(100% - 20px) 52%,
+        calc(100% - 14px) 52%;
+      background-size:6px 6px, 6px 6px;
+      background-repeat:no-repeat;
+    }
+
+    .btn.secondary{
+      background:#fff;border:1px solid var(--border);
+      color:var(--navy);box-shadow:none;font-weight:800;
+    }
+    @media (max-width: 640px){
+      .input, select{min-width:100%}
+      .controlLeft,.controlRight{width:100%}
+    }
+
+    /* Grid */
+    .metaRow{
+      margin-top:12px;
+      display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+      color:var(--muted);
+      font-size:13px;
+      padding:0 2px;
+    }
+    .grid{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:12px;
+    }
+    @media (max-width: 1020px){ .grid{grid-template-columns:repeat(2, minmax(0,1fr))} }
+    @media (max-width: 640px){ .grid{grid-template-columns:minmax(0,1fr)} }
+
+    /* Card */
+    .card{
+      background:#fff;border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:0 10px 26px rgba(15,42,68,.08);
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      height:100%;
+    }
+    .card:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(15,42,68,.12);border-color:#D7E2EF}
+
+    /* 1) Logo */
+    .logoWrap{
+      margin-bottom:-13px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding-top:7px;
+    }
+    .logo{
+      height:100px;
+      width:300px;
+      object-fit:contain;
+      flex-shrink:0;
+      border-radius:14px;
+      background:#fff;
+      padding:6px;
+    }
+
+    /* 2) Company name */
+    .name{
+      margin-bottom:10px;
+      font-size:19px;
+      font-weight:900;
+      color:var(--navy);
+      line-height:1.2;
+      text-align:center;
+      word-break:keep-all;
+    }
+
+    /* 3) Categories */
+    .chips{
+      margin-bottom:10px;
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .chip{
+      font-size:12px;
+      background:var(--soft);
+      border:1px solid rgba(46,211,198,.25);
+      color:var(--navy);
+      padding:6px 8px;
+      border-radius:999px;
+      max-width:100%;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    /* 4) Product names */
+    .plist{
+      margin:0;
+      padding:0 2px;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .pitem{
+      font-size:13px;
+      color:var(--text);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .pmore{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:2px;
+      text-align:left;
+      padding-left:2px;
+    }
+
+    /* 5) View details button (right) */
+    .footer{
+      margin-top:auto;
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      padding-top:6px;
+    }
+    .viewBtn{
+      font-weight:700;
+      color:var(--navy);
+      text-decoration:0;
+      text-decoration-style:none;
+      text-decoration-thickness:0px;
+      text-underline-offset:0px;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+
+    .empty{
+      margin-top:12px;
+      background:#fff;border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px 16px;
+      text-align:center;
+      color:var(--muted);
+    }
+    .loading{
+      margin-top:12px;
+      background:#fff;border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px 16px;
+      display:flex;gap:10px;align-items:center;
+      color:var(--muted);
+    }
+    .spinner{
+      width:18px;height:18px;border-radius:50%;
+      border:3px solid rgba(15,42,68,.15);
+      border-top-color: var(--mint);
+      animation:spin 0.9s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .iconBtn{
+      width:42px;
+      height:42px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--navy);
+      font-size:23px;
+      font-weight:900;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .iconBtn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 18px rgba(15,42,68,.10);
+      border-color:#D7E2EF;
+    }
+    .iconBtn:active{
+      transform:translateY(0px);
+    }
+
+    #enter{
+      background:rgba(46,211,198,.18);
+      border-color:rgba(46,211,198,.35);
+    }
+    #enter:hover{
+      background:rgba(46,211,198,.26);
+    }
+
+    #hintMeta{
+      display:none;
+      background:rgba(46,211,198,.14);
+      border:1px solid rgba(46,211,198,.30);
+      color:var(--navy);
+      padding:6px 10px;
+      border-radius:10px;
+      font-weight:500;
+    }
+    select:hover{
+      border-color:#D7E2EF;
+      box-shadow:0 10px 18px rgba(15,42,68,.08);
+    }
+    select:focus{
+      border-color:rgba(46,211,198,.55);
+      box-shadow:0 0 0 2px rgba(46,211,198,.18);
+    }
+
+    .input::placeholder{
+    color:#9AA7B6!important;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="inner">
+      <div class="brand">
+        <div class="kitaLogoClip">
+          <img class="kitaLogo" src="https://kita.org/imgs/common/logo-kita-org.svg" alt="KITA" />
+        </div>
+        <div class="brandText">
+          <h1>Company Directory</h1>
+          <div class="sub">World IT Show 2026 - 1:1 Business Matching Program</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="controls">
+      <div class="controlLeft">
+        <input id="q" class="input" placeholder="Search company / product / category / certification…" />
+        <select id="mainCat">
+          <option value="">Main category</option>
+        </select>
+        <select id="subCat">
+          <option value="">Sub category</option>
+        </select>
+      </div>
+      <div class="controlRight">
+        <button class="iconBtn" id="enter" title="Search">🔍</button>
+        <button class="iconBtn" id="reset" title="Reset">↻</button>
+      </div>
+    </div>
+    
+    <div class="metaRow">
+      <div id="resultMeta">Loading…</div>
+      <div id="hintMeta"></div>
+    </div>
+
+    <div id="list">
+      <div class="loading"><div class="spinner"></div>Loading companies…</div>
+    </div>
+  </div>
+
+  
+
+  <script>
+    const DATA_URL = "./companies.json";
+    const LOGO_BASE = "assets/logos/";
+
+    const el = (id) => document.getElementById(id);
+
+    let allCompanies = [];
+    let viewCompanies = [];
+
+    function safeStr(v){ return (v ?? "").toString().trim(); }
+    function uniq(arr){ return Array.from(new Set(arr.filter(Boolean))); }
+
+    function splitCats(v){
+      // "A, B, C" -> ["A","B","C"]
+      // 콤마 뒤 공백 유무 상관없이 처리 + 양끝 공백 제거
+      return safeStr(v)
+        .split(",")
+        .map(s => s.trim())
+        .filter(Boolean);
+    }
+
+    // ✅ png → jpg → jpeg fallback
+    function setLocalImageWithFallback(imgEl, basePathWithoutExt){
+      const exts = ["png", "jpg", "jpeg"];
+      let i = 0;
+
+      const tryNext = () => {
+        if(i >= exts.length){
+          imgEl.style.display = "none";
+          return;
+        }
+        imgEl.src = basePathWithoutExt + "." + exts[i];
+        i++;
+      };
+
+      imgEl.onerror = () => tryNext();
+      tryNext();
+    }
+
+    async function load(){
+      try{
+        const res = await fetch(DATA_URL, { cache: "no-store" });
+        if(!res.ok) throw new Error("Failed to load companies.json");
+        const data = await res.json();
+
+        allCompanies = (data.companies || []).map(c => normalizeCompany(c));
+        buildCategoryOptions();
+        applyFilters();
+
+      }catch(err){
+        console.error(err);
+        el("list").innerHTML = `
+          <div class="empty">
+            <b style="color:var(--navy)">Could not load data.</b><br/>
+            Please ensure <b>companies.json</b> is in the same folder.
+          </div>`;
+        el("resultMeta").textContent = "0 results";
+      }
+    }
+
+    function normalizeCompany(c){
+      const products = Array.isArray(c.products) ? c.products : [];
+
+      const productNames = products.map(p => safeStr(p.name)).filter(Boolean);
+      const mainCats = products.flatMap(p => splitCats(p.mainCategory));
+      const subCats  = products.flatMap(p => splitCats(p.subCategory));
+      const certs = products
+        .flatMap(p => Array.isArray(p.certifications) ? p.certifications : [])
+        .map(safeStr)
+        .filter(Boolean);
+
+      const blob = [
+        safeStr(c.name),
+        productNames.join(" "),
+        mainCats.join(" "),
+        subCats.join(" "),
+        certs.join(" ")
+      ].join(" ").toLowerCase();
+
+      return {
+        id: safeStr(c.id),
+        name: safeStr(c.name),
+        products,
+        _mainCats: uniq(mainCats),
+        _subCats: uniq(subCats),
+        _productNames: productNames,
+        _search: blob
+      };
+    }
+
+    function buildCategoryOptions(){
+      const mains = uniq(allCompanies.flatMap(c => c._mainCats)).sort((a,b)=>a.localeCompare(b));
+      const subs  = uniq(allCompanies.flatMap(c => c._subCats)).sort((a,b)=>a.localeCompare(b));
+
+      el("mainCat").innerHTML = `<option value="">Main category</option>` +
+        mains.map(v=>`<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join("");
+
+      el("subCat").innerHTML  = `<option value="">Sub category</option>` +
+        subs.map(v=>`<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join("");
+    }
+
+    function applyFilters(){
+      const q = safeStr(el("q").value).toLowerCase();
+      const main = safeStr(el("mainCat").value);
+      const sub  = safeStr(el("subCat").value);
+
+      viewCompanies = allCompanies.filter(c => {
+        if(q && !c._search.includes(q)) return false;
+        if(main && !c._mainCats.includes(main)) return false;
+        if(sub  && !c._subCats.includes(sub)) return false;
+        return true;
+      });
+
+      render();
+    }
+
+    function render(){
+      el("resultMeta").textContent = `${viewCompanies.length} companies`;
+      const active = [];
+      if(el("mainCat").value) active.push(el("mainCat").value);
+      if(el("subCat").value) active.push(el("subCat").value);
+      const q = safeStr(el("q").value);
+      if(q) active.push(q);
+      const hint = active.length ? active.join(" • ") : "";
+      el("hintMeta").textContent = hint;
+      el("hintMeta").style.display = hint ? "inline-block" : "none";
+
+      if(viewCompanies.length === 0){
+        el("list").innerHTML = `<div class="empty">No companies match your filters.</div>`;
+        return;
+      }
+
+      el("list").innerHTML = `
+        <div class="grid">
+          ${viewCompanies.map(renderCard).join("")}
+        </div>
+      `;
+
+      // 로고 로드
+      document.querySelectorAll("img[data-cid]").forEach(img => {
+        const cid = img.getAttribute("data-cid");
+        setLocalImageWithFallback(img, LOGO_BASE + cid);
+      });
+    }
+
+    ["mainCat","subCat","q"].forEach(id=>{
+      const s = el(id);
+      s.style.color = s.value ? "var(--text)" : "var(--muted)";
+    });
+
+    function renderCard(c){
+      const cats = [...c._mainCats, ...c._subCats].filter(Boolean);
+
+      const show = c._productNames;
+
+      return `
+        <a class="card" href="company.html?id=${encodeURIComponent(c.id)}">
+          <!-- 1) Logo -->
+          <div class="logoWrap">
+            <img class="logo" data-cid="${escapeAttr(c.id)}" alt="logo" />
+          </div>
+
+          <!-- 2) Company name -->
+          <p class="name" title="${escapeHtml(c.name)}">${escapeHtml(c.name || "(No name)")}</p>
+
+          <!-- 3) Categories -->
+          ${cats.length ? `
+            <div class="chips">
+              ${cats.map(t=>`<div class="chip" title="${escapeHtml(t)}">${escapeHtml(t)}</div>`).join("")}
+            </div>
+          ` : ``}
+
+          <!-- 4) Product names -->
+          ${show.length ? `
+            <ul class="plist">
+              ${show.map(p=>`<li class="pitem" title="${escapeHtml(p)}">• ${escapeHtml(p)}</li>`).join("")}
+            </ul>
+          ` : ``}
+
+          <!-- 5) View Details button (right) -->
+          <div class="footer">
+            <span class="viewBtn">View Details →</span>
+          </div>
+        </a>
+      `;
+    }
+
+    // Events
+    // el("q").addEventListener("input", debounce(applyFilters, 150));
+    el("enter").addEventListener("click", applyFilters);
+    el("q").addEventListener("keydown", (e) => { if(e.key === "Enter") applyFilters(); });
+    el("mainCat").addEventListener("change", applyFilters);
+    el("subCat").addEventListener("change", applyFilters);
+    el("reset").addEventListener("click", () => {
+      el("q").value = "";
+      el("mainCat").value = "";
+      el("subCat").value = "";
+      applyFilters();
+    });
+
+    function debounce(fn, delay){
+      let t;
+      return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), delay); };
+    }
+
+    function escapeHtml(str){
+      return (str ?? "").toString()
+        .replaceAll("&","&amp;").replaceAll("<","&lt;")
+        .replaceAll(">","&gt;").replaceAll('"',"&quot;")
+        .replaceAll("'","&#39;");
+    }
+    function escapeAttr(str){
+      return escapeHtml(str).replaceAll("`","&#96;");
+    }
+
+    load();
+  </script>
+</body>
+</html>

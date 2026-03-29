@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Company Detail</title>
+  <style>
+    :root{
+      --navy:#0F2A44;
+      --mint:#2ED3C6;
+      --bg:#F6F8FB;
+      --card:#FFFFFF;
+      --soft:#EAF9F7;
+      --border:#E6EDF5;
+      --text:#334155;
+      --muted:#5F6B7A;
+      --shadow:0 10px 28px rgba(15,42,68,.10);
+      --radius:16px;
+      --max:1100px;
+      --font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);font-family:var(--font);color:var(--text)}
+    a{color:inherit}
+
+    .topbar{
+      background:var(--navy);
+      color:#fff;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .topbar .inner{
+      max-width:var(--max);margin:0 auto;padding:14px 16px;
+      display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:nowrap;
+      height:71px;
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand h1{margin:0;font-size:20px}
+    .sub{font-size:13px;color:#CFE7F5;margin-top:3px;}
+    .brandText{display:flex;flex-direction:column;justify-content:center;height:100%;}
+    .kitaLogoClip{
+      height:33px;
+      width:52px;
+      overflow:hidden;
+      display:block;
+    }
+    .kitaLogo{
+      height:33px;
+      width:130px;
+      display:block;
+      object-fit:contain;
+    }
+    .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .btn{
+      border:0;cursor:pointer;
+      background:var(--mint);color:var(--navy);
+      font-weight:900;
+      padding:10px 14px;border-radius:12px;
+      text-decoration:none;
+      display:inline-flex;gap:8px;align-items:center;
+      white-space:nowrap;
+    }
+    .btn.secondary{
+      background:#fff;border:0 solid var(--border);
+      color:var(--navy);box-shadow:none;font-weight:800;
+    }
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:18px 16px 36px}
+    .panel{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      margin-bottom:12px;
+    }
+
+    .head{
+      padding:16px;
+      border-bottom:1px solid var(--border);
+      display:flex;gap:14px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;
+    }
+    .titleRow{
+      display:flex;gap:14px;align-items:center;min-width:0;
+    }
+    .logo{
+      height:64px;
+      width:auto;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:#fff;
+      object-fit:contain;
+      flex:0 0 auto;
+      flex-shrink:0;
+    }
+
+    .titleBlock{min-width:0}
+    .titleBlock h2{margin:0;font-size:22px;color:var(--navy);line-height:1.2}
+
+    .body{padding:14px 16px 16px}
+    .infoGrid{display:grid;grid-template-columns:1fr;gap:12px}
+    .box{
+      border:0px solid var(--border);
+      border-radius:14px;
+      padding:0 7px;
+      background:transparent;
+    }
+    .box h3{margin:0 0 20px;color:var(--navy);font-size:17px}
+    .kv{display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:start}
+    @media (max-width: 520px){ .kv{grid-template-columns:1fr} }
+    .k{color:var(--muted);font-size:14px}
+    .v{font-size:14px;color:var(--text);word-break:break-word}
+    .v a{
+      color:var(--navy);
+      text-decoration:underline;
+      text-decoration-style:dashed;
+      text-decoration-thickness:1px;
+      text-underline-offset:3px;
+    }
+
+    .productsHead{
+      padding:14px 23px;
+      border-top:1px solid var(--border);
+      background:#fff;
+    }
+    .productsHead h3{margin:0;color:var(--navy);font-size:17px}
+
+    .grid{
+      padding:8px 16px 16px;
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:12px;
+    }
+    @media (max-width: 820px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:17px;
+      display:flex;flex-direction:column;gap:15px;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+
+    .pname{margin:0;font-size:17px;font-weight:900;color:var(--navy);line-height:1.7}
+    .ptags{display:flex;gap:6px;flex-wrap:wrap}
+    .tag{
+      font-size:13px;
+      background:var(--soft);
+      border:1px solid rgba(46,211,198,.25);
+      color:var(--navy);
+      padding:7px 10px;border-radius:999px;
+      max-width:100%;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .prodImg{
+      width:100%;
+      height:300px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#F0F6FB;
+      object-fit:contain;
+      display:block;
+    }
+    @media (max-width: 820px){
+      .prodImg{ height:240px; }
+    }
+    .text{font-size:14px;line-height:1.6;color:var(--text);white-space:pre-wrap}
+    .divider{height:1px;background:var(--border);margin:6px 0}
+
+    .empty{padding:24px 16px;text-align:center;color:var(--muted)}
+    .loading{padding:18px 16px;color:var(--muted);display:flex;gap:10px;align-items:center}
+    .spinner{
+      width:18px;height:18px;border-radius:50%;
+      border:3px solid rgba(15,42,68,.15);
+      border-top-color: var(--mint);
+      animation:spin 0.9s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    #btnMeeting{
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      animation: meetingGlow 1.8s ease-in-out infinite;
+    }
+
+    #btnMeeting::after{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-120%;
+      width:80%;
+      height:100%;
+      transform: skewX(-20deg);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.7),
+        transparent
+      );
+      animation: meetingShine 2.2s linear infinite;
+      pointer-events:none;
+    }
+
+    @keyframes meetingShine{
+      0%   { left:-120%; }
+      100% { left:120%; }
+    }
+
+    @keyframes meetingGlow{
+      0%,100%{
+        text-shadow: 0 0 0 rgba(255,255,255,0);
+      }
+      50%{
+        text-shadow:
+          0 0 10px rgba(255,255,255,.8),
+          0 0 20px rgba(255,255,255,.5);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="inner">
+      <div class="brand">
+        <div class="kitaLogoClip">
+          <img class="kitaLogo" src="https://kita.org/imgs/common/logo-kita-org.svg" alt="KITA" />
+        </div>
+        <div class="brandText">
+          <h1>Company Detail</h1>
+          <div class="sub" id="companyNameTop">Company Name</div>
+          <div class="sub" id="companySub">Loading…</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn secondary" href="index.html">← Back to list</a>
+        <a class="btn" id="btnMeeting" href="#" style="display:none;"><span>Meeting Request</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="panel" id="companyPanel">
+      <div class="head">
+        <div class="titleRow">
+          <img id="logo" class="logo" alt="Company logo" />
+          <div class="titleBlock">
+            <h2 id="hName">Loading…</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="body">
+        <div class="infoGrid">
+          <div class="box">
+            <h3>Company Info</h3>
+            <div class="kv">
+              <div class="k">Business Area</div>
+              <div class="v" id="vArea">-</div>
+
+              <div class="k">China Channel</div>
+              <div class="v" id="vChannel">-</div>
+
+              <div class="k">Introduction</div>
+              <div class="v" id="vIntroduction">-</div>
+
+              <div class="k">Homepage</div>
+              <div class="v" id="vHomepage">-</div>
+
+              <div class="k">Catalog</div>
+              <div class="v" id="vCatalog">-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="productsHead">
+        <h3>Products</h3>
+      </div>
+
+      <div id="products">
+        <div class="loading"><div class="spinner"></div>Loading products…</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const DATA_URL = "./companies.json";
+    const LOGO_BASE = "assets/logos/";
+    const PRODUCT_BASE = "assets/products/";
+
+    const el = (id) => document.getElementById(id);
+    const params = new URLSearchParams(location.search);
+    const companyId = (params.get("id") || "").trim();
+
+    if (!companyId) {
+      el("companyPanel").innerHTML = `
+        <div class="empty">
+          <b style="color:var(--navy)">Missing company id.</b>
+          <div style="margin-top:6px;">Open from <a href="index.html">index.html</a>.</div>
+        </div>`;
+      el("companySub").textContent = "No company selected";
+      throw new Error("Missing company id");
+    }
+
+    let company = null;
+    let products = [];
+
+    function safeStr(v) {
+      return (v ?? "").toString().trim();
+    }
+
+    function splitCats(v) {
+      return safeStr(v)
+        .split(",")
+        .map(s => s.trim())
+        .filter(Boolean);
+    }
+
+    function splitLinks(v) {
+      return safeStr(v)
+        .split(/[,\r\n]+/)
+        .map(s => s.trim())
+        .filter(Boolean);
+    }
+
+    function normalizeImagePath(path) {
+      const raw = safeStr(path);
+      if (!raw) return "";
+      if (/^(https?:)?\/\//i.test(raw)) return raw;
+      return raw.replace(/^\.?\//, "");
+    }
+
+    async function load() {
+      try {
+        const res = await fetch(DATA_URL, { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to load companies.json");
+        const data = await res.json();
+
+        const companies = (data.companies || []).map(c => ({
+          ...c,
+          id: safeStr(c.id),
+          name: safeStr(c.name),
+          businessArea: safeStr(c.businessArea),
+          channel: safeStr(c.channel),
+          introduction: safeStr(c.introduction),
+          links: c.links || {},
+          products: Array.isArray(c.products) ? c.products : []
+        }));
+
+        company = companies.find(c => c.id === companyId);
+
+        if (!company) {
+          el("companyPanel").innerHTML = `
+            <div class="empty">
+              <b style="color:var(--navy)">Company not found.</b>
+              <div style="margin-top:6px;">Go back to <a href="index.html">list</a>.</div>
+            </div>`;
+          el("companySub").textContent = "Company not found";
+          return;
+        }
+
+        products = company.products.map(p => normalizeProduct(p));
+        products.sort((a, b) => safeStr(a.name).localeCompare(safeStr(b.name)));
+
+        hydrateCompanyUI();
+        renderProducts();
+
+      } catch (err) {
+        console.error(err);
+        el("companyPanel").innerHTML = `
+          <div class="empty">
+            <b style="color:var(--navy)">Could not load data.</b>
+            <div style="margin-top:6px;">Please ensure <b>companies.json</b> is in the same folder.</div>
+          </div>`;
+        el("companySub").textContent = "Data load error";
+      }
+    }
+
+    function normalizeProduct(p) {
+      return {
+        id: safeStr(p.id),
+        name: safeStr(p.name),
+        mainCategory: safeStr(p.mainCategory),
+        subCategory: safeStr(p.subCategory),
+        detail: safeStr(p.detail),
+        xuqiu: safeStr(p.xuqiu),
+        hscode: Array.isArray(p.hscode) ? p.hscode.map(safeStr).filter(Boolean) : [],
+        images: Array.isArray(p.images) ? p.images.map(normalizeImagePath).filter(Boolean) : [],
+        meetingRequest: safeStr(p.meetingRequest)
+      };
+    }
+
+    function setLocalImageWithFallback(imgEl, basePathWithoutExt) {
+      const exts = ["png", "jpg", "jpeg", "PNG", "JPG", "JPEG"];
+      let i = 0;
+
+      const tryNext = () => {
+        if (i >= exts.length) {
+          imgEl.style.display = "none";
+          return;
+        }
+        imgEl.src = basePathWithoutExt + "." + exts[i];
+        i++;
+      };
+
+      imgEl.onerror = () => tryNext();
+      tryNext();
+    }
+
+    function setProductImageFallback(imgEl, productId) {
+      const exts = ["png", "jpg", "jpeg", "PNG", "JPG", "JPEG"];
+      let i = 0;
+
+      const tryNext = () => {
+        if (i >= exts.length) {
+          imgEl.style.display = "none";
+          return;
+        }
+        imgEl.src = `${PRODUCT_BASE}${productId}.${exts[i]}`;
+        i++;
+      };
+
+      imgEl.onerror = () => tryNext();
+      tryNext();
+    }
+
+    function hydrateCompanyUI() {
+      document.title = `${company.name || "Company"} | Detail`;
+      el("hName").textContent = company.name || "(No name)";
+      el("companyNameTop").textContent = company.name || "Company Name";
+      el("companySub").textContent = " ";
+
+      const logoEl = el("logo");
+      setLocalImageWithFallback(logoEl, LOGO_BASE + company.id);
+
+      el("vArea").textContent = company.businessArea || "-";
+      el("vChannel").textContent = company.channel || "-";
+      el("vIntroduction").textContent = company.introduction || "-";
+
+      const links = company.links || {};
+
+      if (links.homepage) {
+        const urls = splitLinks(links.homepage);
+        el("vHomepage").innerHTML = urls
+          .map(url => `
+            <a href="${escapeAttr(url)}" target="_blank" rel="noopener">
+              ${escapeHtml(url)}
+            </a>
+          `)
+          .join("<br>");
+      } else {
+        el("vHomepage").textContent = "-";
+      }
+
+      if (links.catalog) {
+        const urls = splitLinks(links.catalog);
+        el("vCatalog").innerHTML = urls
+          .map(url => `
+            <a href="${escapeAttr(url)}" target="_blank" rel="noopener">
+              ${escapeHtml(url)}
+            </a>
+          `)
+          .join("<br>");
+      } else {
+        el("vCatalog").textContent = "-";
+      }
+
+      const meeting = products.map(p => p.meetingRequest).find(Boolean);
+      if (meeting) {
+        const a = el("btnMeeting");
+        a.style.display = "inline-flex";
+        a.href = meeting;
+        a.target = "_blank";
+        a.rel = "noopener";
+      }
+    }
+
+    function renderProducts() {
+      if (products.length === 0) {
+        el("products").innerHTML = `<div class="empty">No products.</div>`;
+        return;
+      }
+
+      el("products").innerHTML = `
+        <div class="grid">
+          ${products.map(renderProductCard).join("")}
+        </div>
+      `;
+
+      document.querySelectorAll(".prodImg").forEach(img => {
+        const productId = img.dataset.productId;
+        const originalSrc = img.getAttribute("src");
+
+        if (!productId) return;
+
+        img.onerror = () => setProductImageFallback(img, productId);
+
+        if (!originalSrc || !originalSrc.trim()) {
+          setProductImageFallback(img, productId);
+        }
+      });
+    }
+
+    function renderProductCard(p) {
+      const cats = [
+        ...splitCats(p.mainCategory),
+        ...splitCats(p.subCategory)
+      ];
+
+      const hsCodes = Array.isArray(p.hscode) ? p.hscode : [];
+      const imageSrc = p.images && p.images.length ? p.images[0] : "";
+
+      return `
+        <div class="card">
+          <p class="pname">${escapeHtml(p.name || "(No product name)")}</p>
+
+          <img
+            class="prodImg"
+            src="${escapeAttr(imageSrc)}"
+            data-product-id="${escapeAttr(p.id)}"
+            alt="${escapeAttr(p.name)}"
+            loading="lazy"
+          />
+
+          ${p.detail ? `
+            <div class="divider"></div>
+            <div class="text">${escapeHtml(p.detail)}</div>
+          ` : ``}
+
+          ${p.xuqiu ? `
+            <div class="divider"></div>
+            <div class="text"><b>Main Target:</b> ${escapeHtml(p.xuqiu)}</div>
+          ` : ``}
+
+          ${hsCodes.length ? `
+            <div class="divider"></div>
+            <div class="text"><b>HS Code:</b> ${escapeHtml(hsCodes.join(", "))}</div>
+          ` : ``}
+        </div>
+      `;
+    }
+
+    function escapeHtml(str) {
+      return (str ?? "").toString()
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function escapeAttr(str) {
+      return escapeHtml(str).replaceAll("`", "&#96;");
+    }
+
+    load();
+  </script>
+</body>
+</html>
