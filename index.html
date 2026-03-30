@@ -1,222 +1,409 @@
 <!doctype html>
-<html lang="ko">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Company Directory</title>
+  <title>韩国企业清单 | 中国（江苏）韩国经贸合作交流会</title>
   <style>
     :root{
-      --navy:#0F2A44;
-      --mint:#2ED3C6;
-      --bg:#F6F8FB;
-      --card:#FFFFFF;
-      --soft:#EAF9F7;
-      --border:#E6EDF5;
-      --text:#334155;
-      --muted:#5F6B7A;
-      --shadow:0 10px 28px rgba(15,42,68,.10);
-      --radius:16px;
-      --max:1180px;
+      --navy:#10263F;
+      --navy-2:#183B63;
+      --ink:#1D2733;
+      --muted:#607080;
+      --gold:#B89044;
+      --gold-soft:#E9D8B0;
+      --ivory:#FBF8F2;
+      --paper:#FFFFFF;
+      --mist:#F2F5F8;
+      --line:#E5E9EF;
+      --red:#B63A3A;
+      --blue:#2C5E9E;
+      --shadow:0 18px 44px rgba(16,38,63,.10);
+      --radius-xl:24px;
+      --radius-lg:18px;
+      --radius-md:14px;
+      --max:1120px;
       --font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
     }
+
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);font-family:var(--font);color:var(--text)}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:var(--font);
+      color:var(--ink);
+      line-height:1.68;
+      background:
+        radial-gradient(circle at top left, rgba(44,94,158,.08), transparent 26%),
+        radial-gradient(circle at top right, rgba(182,58,58,.06), transparent 22%),
+        linear-gradient(180deg, #f6f8fb 0%, #f4f1eb 100%);
+    }
     a{color:inherit;text-decoration:none}
 
-    /* Header */
-    .topbar{
-      background:var(--navy);
-      color:#fff;
-      border-bottom:1px solid rgba(255,255,255,.10);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 18px 56px;
     }
-    .topbar .inner{
-      max-width:var(--max);margin:0 auto;padding:14px 16px;
-      display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap;
-      min-height:71px;
-    }
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand h1{margin:0;font-size:20px}
-    .sub{font-size:13px;color:#CFE7F5;margin-top:7px;}
-    .brandText{display:flex;flex-direction:column;line-height:1.1;}
-    .kitaLogoClip{
-      height:33px;
-      width:52px;
+
+    .shell{
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.9);
+      border-radius:32px;
       overflow:hidden;
-      display:block;
-    }
-    .kitaLogo{
-      height:33px;
-      width:130px;
-      display:block;
-      object-fit:contain;
-    }
-
-    /* Controls */
-    .wrap{max-width:var(--max);margin:0 auto;padding:18px 16px 36px}
-    .controls{
-      background:#fff;border:1px solid var(--border);
-      border-radius:var(--radius);
       box-shadow:var(--shadow);
-      padding:14px;
-      display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+      backdrop-filter:blur(10px);
     }
-    .controlLeft,.controlRight{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .input, select{
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:12px;
+
+    .hero{
+      position:relative;
+      padding:30px 28px 34px;
+      color:#fff;
+      background:
+        linear-gradient(135deg, rgba(11,28,48,.96), rgba(18,48,82,.92)),
+        linear-gradient(90deg, rgba(182,58,58,.16), rgba(44,94,158,.16));
+      overflow:hidden;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-30% auto auto -10%;
+      width:320px;
+      height:320px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.10), transparent 70%);
+      pointer-events:none;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      right:-80px;
+      top:-40px;
+      width:280px;
+      height:280px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(184,144,68,.22), transparent 68%);
+      pointer-events:none;
+    }
+
+    .hero-inner{position:relative;z-index:1}
+
+    .hero-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .hero-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.16);
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:700;
+    }
+
+    .hero-badge::before,
+    .hero-badge::after{
+      content:"";
+      display:block;
+      width:8px;
+      height:8px;
+      border-radius:50%;
+    }
+    .hero-badge::before{background:var(--red)}
+    .hero-badge::after{background:var(--blue)}
+
+    .kita-logo img{
+      display:block;
+      max-width:108px;
+      height:auto;
+      filter:brightness(0) invert(1);
+      opacity:.95;
+    }
+
+    .title-wrap{
+      border-top:1px solid rgba(255,255,255,.12);
+      border-bottom:1px solid rgba(255,255,255,.10);
+      padding:18px 0 16px;
+      margin-bottom:16px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      margin-bottom:10px;
+      color:rgba(233,216,176,.96);
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.08em;
+    }
+
+    h1{
+      margin:0;
+      font-size:31px;
+      line-height:1.28;
+      letter-spacing:.01em;
+      font-weight:800;
+    }
+
+    .subtitle{
+      margin:14px 0 0;
+      font-size:15px;
+      color:rgba(255,255,255,.86);
+      max-width:780px;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
       padding:10px 12px;
-      font-size:14px;outline:none;
-      min-width:350px;
+      border-radius:14px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      font-size:13px;
+      color:#fff;
     }
-    select{min-width:190px}
-    .btn{
-      border:0;cursor:pointer;
-      background:var(--mint);color:var(--navy);
-      font-weight:900;
-      padding:10px 14px;border-radius:12px;
-      box-shadow:0 8px 18px rgba(46,211,198,.22);
-      text-decoration:none;
-      display:inline-flex;gap:8px;align-items:center;
-      white-space:nowrap;
-    }
-    select{
-      appearance:none;
-      -webkit-appearance:none;
-      -moz-appearance:none;
 
-      padding-right:44px;
+    .content{padding:26px}
+
+    .section{
+      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(251,248,242,.95));
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      padding:22px;
+      box-shadow:0 10px 22px rgba(16,38,63,.04);
+    }
+    .section + .section{margin-top:16px}
+
+    .section-head{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .section-head .mark{
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg, rgba(184,144,68,.16), rgba(184,144,68,.28));
+      color:var(--gold);
+      font-weight:800;
+      font-size:13px;
+      border:1px solid rgba(184,144,68,.24);
+      flex:0 0 auto;
+    }
+
+    .section-head h2{
+      margin:0;
+      font-size:18px;
+      color:var(--navy);
+      letter-spacing:.02em;
+    }
+
+    .section-head .line{
+      flex:1;
+      height:1px;
+      background:linear-gradient(90deg, rgba(184,144,68,.5), rgba(229,233,239,1));
+    }
+
+    .lede{
+      margin:0;
+      color:#2d3945;
+      font-size:15px;
+    }
+
+    .filter-wrap{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .filter-btn{
+      border:none;
       cursor:pointer;
-
-      background-color:#fff;
-      background-image:
-        linear-gradient(45deg, transparent 50%, var(--navy) 50%),
-        linear-gradient(135deg, var(--navy) 50%, transparent 50%);
-      background-position:
-        calc(100% - 20px) 52%,
-        calc(100% - 14px) 52%;
-      background-size:6px 6px, 6px 6px;
-      background-repeat:no-repeat;
+      padding:10px 16px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--navy);
+      font-weight:700;
+      font-size:13px;
+      transition:.2s ease;
     }
 
-    .btn.secondary{
-      background:#fff;border:1px solid var(--border);
-      color:var(--navy);box-shadow:none;font-weight:800;
-    }
-    @media (max-width: 640px){
-      .input, select{min-width:100%}
-      .controlLeft,.controlRight{width:100%}
+    .filter-btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(16,38,63,.08);
     }
 
-    /* Grid */
+    .filter-btn.active{
+      background:linear-gradient(135deg, var(--navy), var(--navy-2));
+      color:#fff;
+      border-color:transparent;
+    }
+
     .metaRow{
-      margin-top:12px;
-      display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
-      color:var(--muted);
+      margin-top:16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+      color:#758294;
       font-size:13px;
       padding:0 2px;
     }
+
+    .resultBadge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--navy);
+      font-weight:700;
+    }
+
+    .categoryLabel{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#f8f3e8;
+      color:#7e6129;
+      border:1px solid rgba(184,144,68,.22);
+      font-weight:700;
+    }
+
     .grid{
-      margin-top:12px;
+      margin-top:14px;
       display:grid;
       grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:12px;
+      gap:14px;
     }
-    @media (max-width: 1020px){ .grid{grid-template-columns:repeat(2, minmax(0,1fr))} }
-    @media (max-width: 640px){ .grid{grid-template-columns:minmax(0,1fr)} }
 
-    /* Card */
-    .card{
-      background:#fff;border:1px solid var(--border);
-      border-radius:14px;
-      box-shadow:0 10px 26px rgba(15,42,68,.08);
-      padding:14px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-      height:100%;
+    .seller-card{
+      display:block;
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:linear-gradient(180deg, #fff, #faf7f1);
+      padding:18px;
+      transition:.2s ease;
+      box-shadow:0 8px 18px rgba(16,38,63,.04);
+      min-height:260px;
+      position:relative;
+      overflow:hidden;
     }
-    .card:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(15,42,68,.12);border-color:#D7E2EF}
 
-    /* 1) Logo */
+    .seller-card::before{
+      content:"";
+      position:absolute;
+      left:0; right:0; top:0;
+      height:4px;
+      background:linear-gradient(90deg, var(--red), var(--gold), var(--blue));
+      opacity:.95;
+    }
+
+    .seller-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 16px 30px rgba(16,38,63,.10);
+    }
+
     .logoWrap{
-      margin-bottom:-13px;
       display:flex;
       justify-content:center;
       align-items:center;
-      padding-top:7px;
-    }
-    .logo{
-      height:100px;
-      width:300px;
-      object-fit:contain;
-      flex-shrink:0;
-      border-radius:14px;
-      background:#fff;
-      padding:6px;
+      padding-top:8px;
+      margin-bottom:10px;
+      min-height:96px;
     }
 
-    /* 2) Company name */
-    .name{
-      margin-bottom:10px;
-      font-size:19px;
-      font-weight:900;
+    .logo{
+      height:88px;
+      width:100%;
+      max-width:240px;
+      object-fit:contain;
+      border-radius:14px;
+      background:#fff;
+      padding:8px;
+    }
+
+    .seller-name{
+      margin:0 0 10px;
+      font-size:18px;
       color:var(--navy);
-      line-height:1.2;
+      line-height:1.4;
+      font-weight:800;
       text-align:center;
       word-break:keep-all;
     }
 
-    /* 3) Categories */
-    .chips{
-      margin-bottom:10px;
+    .keyword-list{
       display:flex;
-      gap:6px;
       flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:14px;
       justify-content:center;
     }
-    .chip{
-      font-size:12px;
-      background:var(--soft);
-      border:1px solid rgba(46,211,198,.25);
-      color:var(--navy);
-      padding:6px 8px;
+
+    .keyword{
+      display:inline-flex;
+      padding:6px 10px;
       border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      color:#506171;
+      font-size:12px;
+      font-weight:600;
       max-width:100%;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
 
-    /* 4) Product names */
     .plist{
-      margin:0;
-      padding:0 2px;
+      margin:0 0 14px;
+      padding:0;
       list-style:none;
       display:flex;
       flex-direction:column;
-      gap:6px;
+      gap:8px;
     }
+
     .pitem{
-      font-size:13px;
-      color:var(--text);
+      font-size:13.5px;
+      color:var(--muted);
+      line-height:1.6;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
-    .pmore{
-      font-size:12px;
-      color:var(--muted);
-      margin-top:2px;
-      text-align:left;
-      padding-left:2px;
-    }
 
-    /* 5) View details button (right) */
     .footer{
       margin-top:auto;
       display:flex;
@@ -224,171 +411,154 @@
       align-items:center;
       padding-top:6px;
     }
-    .viewBtn{
-      font-weight:700;
-      color:var(--navy);
-      text-decoration:0;
-      text-decoration-style:none;
-      text-decoration-thickness:0px;
-      text-underline-offset:0px;
-      padding:8px 10px;
-      border-radius:12px;
-      border:1px solid transparent;
+
+    .view-more{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-size:13px;
+      font-weight:800;
+      color:var(--blue);
     }
 
-    .empty{
-      margin-top:12px;
-      background:#fff;border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+    .empty,
+    .loading{
+      margin-top:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(251,248,242,.95));
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      box-shadow:0 10px 22px rgba(16,38,63,.04);
       padding:22px 16px;
       text-align:center;
       color:var(--muted);
     }
+
     .loading{
-      margin-top:12px;
-      background:#fff;border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:18px 16px;
-      display:flex;gap:10px;align-items:center;
-      color:var(--muted);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
     }
+
     .spinner{
       width:18px;height:18px;border-radius:50%;
-      border:3px solid rgba(15,42,68,.15);
-      border-top-color: var(--mint);
+      border:3px solid rgba(16,38,63,.15);
+      border-top-color: var(--gold);
       animation:spin 0.9s linear infinite;
     }
     @keyframes spin{to{transform:rotate(360deg)}}
 
-    .iconBtn{
-      width:42px;
-      height:42px;
-      border-radius:10px;
-      border:1px solid var(--border);
-      background:#fff;
-      color:var(--navy);
-      font-size:23px;
-      font-weight:900;
-      cursor:pointer;
-      display:grid;
-      place-items:center;
-      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-    }
-    .iconBtn:hover{
-      transform:translateY(-1px);
-      box-shadow:0 10px 18px rgba(15,42,68,.10);
-      border-color:#D7E2EF;
-    }
-    .iconBtn:active{
-      transform:translateY(0px);
+    .footer-note{
+      margin-top:18px;
+      text-align:center;
+      color:#758294;
+      font-size:12px;
     }
 
-    #enter{
-      background:rgba(46,211,198,.18);
-      border-color:rgba(46,211,198,.35);
-    }
-    #enter:hover{
-      background:rgba(46,211,198,.26);
+    @media (max-width: 980px){
+      .grid{grid-template-columns:repeat(2, minmax(0,1fr));}
     }
 
-    #hintMeta{
-      display:none;
-      background:rgba(46,211,198,.14);
-      border:1px solid rgba(46,211,198,.30);
-      color:var(--navy);
-      padding:6px 10px;
-      border-radius:10px;
-      font-weight:500;
-    }
-    select:hover{
-      border-color:#D7E2EF;
-      box-shadow:0 10px 18px rgba(15,42,68,.08);
-    }
-    select:focus{
-      border-color:rgba(46,211,198,.55);
-      box-shadow:0 0 0 2px rgba(46,211,198,.18);
+    @media (max-width: 680px){
+      h1{font-size:26px}
+      .content{padding:18px}
+      .grid{grid-template-columns:1fr;}
+      .hero{padding:24px 18px 28px}
+      .section{padding:18px}
     }
 
-    .input::placeholder{
-    color:#9AA7B6!important;
+    @media print{
+      body{background:#fff}
+      .wrap{padding:0}
+      .shell,.section,.seller-card{box-shadow:none}
     }
-
-
   </style>
 </head>
-
 <body>
-  <div class="topbar">
-    <div class="inner">
-      <div class="brand">
-        <div class="kitaLogoClip">
-          <img class="kitaLogo" src="https://kita.org/imgs/common/logo-kita-org.svg" alt="KITA" />
-        </div>
-        <div class="brandText">
-          <h1>Company Directory</h1>
-          <div class="sub">World IT Show 2026 - 1:1 Business Matching Program</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="wrap">
-    <div class="controls">
-      <div class="controlLeft">
-        <input id="q" class="input" placeholder="Search company / product / category / certification…" />
-        <select id="mainCat">
-          <option value="">Main category</option>
-        </select>
-        <select id="subCat">
-          <option value="">Sub category</option>
-        </select>
-      </div>
-      <div class="controlRight">
-        <button class="iconBtn" id="enter" title="Search">🔍</button>
-        <button class="iconBtn" id="reset" title="Reset">↻</button>
-      </div>
-    </div>
-    
-    <div class="metaRow">
-      <div id="resultMeta">Loading…</div>
-      <div id="hintMeta"></div>
-    </div>
+    <div class="shell">
+      <header class="hero">
+        <div class="hero-inner">
+          <div class="hero-top">
+            <div class="hero-badge">Korean Seller Directory</div>
+            <div class="kita-logo">
+              <img src="https://kita.org/imgs/common/logo-kita-org.svg" alt="KITA" />
+            </div>
+          </div>
 
-    <div id="list">
-      <div class="loading"><div class="spinner"></div>Loading companies…</div>
+          <div class="title-wrap">
+            <div class="eyebrow">中韩经贸合作交流项目</div>
+            <h1>韩国企业清单</h1>
+          </div>
+
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="section">
+          <div class="section-head">
+            <h2>浏览说明</h2>
+            <div class="line"></div>
+          </div>
+
+          <p class="lede">
+            您可按下方产品类别浏览韩国企业。<br/>每家企业均提供主营产品及分类信息。
+            <br/>点击 “查看详情” 后，可进入企业详情页面查看更完整的公司与产品资料。
+          </p>
+
+          <div class="filter-wrap" id="filterButtons">
+            <button class="filter-btn active" data-filter="all">全部</button>
+          </div>
+        </section>
+
+        <div class="metaRow">
+          <div id="resultMeta" class="resultBadge">Loading…</div>
+          <div id="hintMeta" class="categoryLabel" style="display:none;"></div>
+        </div>
+
+        <div id="list">
+          <div class="loading"><div class="spinner"></div>Loading companies…</div>
+        </div>
+
+        <div class="footer-note">
+          韩国贸易协会（KITA）<br>
+          <a href="https://www.kita.org" target="_blank" rel="noopener noreferrer">www.kita.org</a>
+        </div>
+      </main>
     </div>
   </div>
-
-  
 
   <script>
     const DATA_URL = "./companies.json";
     const LOGO_BASE = "assets/logos/";
-
     const el = (id) => document.getElementById(id);
 
     let allCompanies = [];
     let viewCompanies = [];
+    let currentFilter = "all";
+    let filterMap = {};
 
     function safeStr(v){ return (v ?? "").toString().trim(); }
     function uniq(arr){ return Array.from(new Set(arr.filter(Boolean))); }
 
     function splitCats(v){
-      // "A, B, C" -> ["A","B","C"]
-      // 콤마 뒤 공백 유무 상관없이 처리 + 양끝 공백 제거
       return safeStr(v)
         .split(",")
         .map(s => s.trim())
         .filter(Boolean);
     }
 
-    // ✅ png → jpg → jpeg fallback
+    function slugify(text){
+      return safeStr(text)
+        .toLowerCase()
+        .replace(/&/g, 'and')
+        .replace(/[^a-z0-9\u4e00-\u9fff\uac00-\ud7af]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
     function setLocalImageWithFallback(imgEl, basePathWithoutExt){
       const exts = ["png", "jpg", "jpeg"];
       let i = 0;
-
       const tryNext = () => {
         if(i >= exts.length){
           imgEl.style.display = "none";
@@ -397,7 +567,6 @@
         imgEl.src = basePathWithoutExt + "." + exts[i];
         i++;
       };
-
       imgEl.onerror = () => tryNext();
       tryNext();
     }
@@ -409,9 +578,8 @@
         const data = await res.json();
 
         allCompanies = (data.companies || []).map(c => normalizeCompany(c));
-        buildCategoryOptions();
+        buildFilterButtons();
         applyFilters();
-
       }catch(err){
         console.error(err);
         el("list").innerHTML = `
@@ -419,13 +587,12 @@
             <b style="color:var(--navy)">Could not load data.</b><br/>
             Please ensure <b>companies.json</b> is in the same folder.
           </div>`;
-        el("resultMeta").textContent = "0 results";
+        el("resultMeta").textContent = "0 companies";
       }
     }
 
     function normalizeCompany(c){
       const products = Array.isArray(c.products) ? c.products : [];
-
       const productNames = products.map(p => safeStr(p.name)).filter(Boolean);
       const mainCats = products.flatMap(p => splitCats(p.mainCategory));
       const subCats  = products.flatMap(p => splitCats(p.subCategory));
@@ -434,13 +601,7 @@
         .map(safeStr)
         .filter(Boolean);
 
-      const blob = [
-        safeStr(c.name),
-        productNames.join(" "),
-        mainCats.join(" "),
-        subCats.join(" "),
-        certs.join(" ")
-      ].join(" ").toLowerCase();
+      const primaryCategory = uniq(mainCats)[0] || uniq(subCats)[0] || "Others";
 
       return {
         id: safeStr(c.id),
@@ -449,49 +610,64 @@
         _mainCats: uniq(mainCats),
         _subCats: uniq(subCats),
         _productNames: productNames,
-        _search: blob
+        _primaryCategory: primaryCategory,
+        _filterKey: slugify(primaryCategory),
+        _search: [
+          safeStr(c.name),
+          productNames.join(" "),
+          mainCats.join(" "),
+          subCats.join(" "),
+          certs.join(" ")
+        ].join(" ").toLowerCase()
       };
     }
 
-    function buildCategoryOptions(){
-      const mains = uniq(allCompanies.flatMap(c => c._mainCats)).sort((a,b)=>a.localeCompare(b));
-      const subs  = uniq(allCompanies.flatMap(c => c._subCats)).sort((a,b)=>a.localeCompare(b));
+    function buildFilterButtons(){
+      const wrap = el("filterButtons");
+      const categories = uniq(allCompanies.map(c => c._primaryCategory));
+      filterMap = { all: "全部" };
 
-      el("mainCat").innerHTML = `<option value="">Main category</option>` +
-        mains.map(v=>`<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join("");
+      const buttons = [
+        `<button class="filter-btn active" data-filter="all">全部</button>`
+      ];
 
-      el("subCat").innerHTML  = `<option value="">Sub category</option>` +
-        subs.map(v=>`<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join("");
+      categories.forEach(cat => {
+        const key = slugify(cat);
+        filterMap[key] = cat;
+        buttons.push(`<button class="filter-btn" data-filter="${escapeAttr(key)}">${escapeHtml(cat)}</button>`);
+      });
+
+      wrap.innerHTML = buttons.join("");
+
+      wrap.querySelectorAll('.filter-btn').forEach(button => {
+        button.addEventListener('click', () => {
+          wrap.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          currentFilter = button.dataset.filter;
+          applyFilters();
+        });
+      });
     }
 
     function applyFilters(){
-      const q = safeStr(el("q").value).toLowerCase();
-      const main = safeStr(el("mainCat").value);
-      const sub  = safeStr(el("subCat").value);
-
       viewCompanies = allCompanies.filter(c => {
-        if(q && !c._search.includes(q)) return false;
-        if(main && !c._mainCats.includes(main)) return false;
-        if(sub  && !c._subCats.includes(sub)) return false;
-        return true;
+        if(currentFilter === 'all') return true;
+        return c._filterKey === currentFilter;
       });
-
       render();
     }
 
     function render(){
       el("resultMeta").textContent = `${viewCompanies.length} companies`;
-      const active = [];
-      if(el("mainCat").value) active.push(el("mainCat").value);
-      if(el("subCat").value) active.push(el("subCat").value);
-      const q = safeStr(el("q").value);
-      if(q) active.push(q);
-      const hint = active.length ? active.join(" • ") : "";
-      el("hintMeta").textContent = hint;
-      el("hintMeta").style.display = hint ? "inline-block" : "none";
+      if(currentFilter === 'all'){
+        el("hintMeta").style.display = 'none';
+      } else {
+        el("hintMeta").textContent = filterMap[currentFilter] || currentFilter;
+        el("hintMeta").style.display = 'inline-flex';
+      }
 
       if(viewCompanies.length === 0){
-        el("list").innerHTML = `<div class="empty">No companies match your filters.</div>`;
+        el("list").innerHTML = `<div class="empty">No companies match this category.</div>`;
         return;
       }
 
@@ -501,77 +677,49 @@
         </div>
       `;
 
-      // 로고 로드
       document.querySelectorAll("img[data-cid]").forEach(img => {
         const cid = img.getAttribute("data-cid");
         setLocalImageWithFallback(img, LOGO_BASE + cid);
       });
     }
 
-    ["mainCat","subCat","q"].forEach(id=>{
-      const s = el(id);
-      s.style.color = s.value ? "var(--text)" : "var(--muted)";
-    });
-
     function renderCard(c){
-      const cats = [...c._mainCats, ...c._subCats].filter(Boolean);
-
-      const show = c._productNames;
+      const cats = [...c._mainCats, ...c._subCats].filter(Boolean).slice(0, 6);
+      const show = c._productNames.slice(0, 6);
 
       return `
-        <a class="card" href="company.html?id=${encodeURIComponent(c.id)}">
-          <!-- 1) Logo -->
+        <a class="seller-card" href="company.html?id=${encodeURIComponent(c.id)}">
           <div class="logoWrap">
             <img class="logo" data-cid="${escapeAttr(c.id)}" alt="logo" />
           </div>
 
-          <!-- 2) Company name -->
-          <p class="name" title="${escapeHtml(c.name)}">${escapeHtml(c.name || "(No name)")}</p>
+          <h3 class="seller-name" title="${escapeHtml(c.name)}">${escapeHtml(c.name || "(No name)")}</h3>
 
-          <!-- 3) Categories -->
           ${cats.length ? `
-            <div class="chips">
-              ${cats.map(t=>`<div class="chip" title="${escapeHtml(t)}">${escapeHtml(t)}</div>`).join("")}
+            <div class="keyword-list">
+              ${cats.map(t=>`<span class="keyword" title="${escapeHtml(t)}">${escapeHtml(t)}</span>`).join("")}
             </div>
           ` : ``}
 
-          <!-- 4) Product names -->
           ${show.length ? `
             <ul class="plist">
               ${show.map(p=>`<li class="pitem" title="${escapeHtml(p)}">• ${escapeHtml(p)}</li>`).join("")}
             </ul>
           ` : ``}
 
-          <!-- 5) View Details button (right) -->
           <div class="footer">
-            <span class="viewBtn">View Details →</span>
+            <span class="view-more">查看详情 →</span>
           </div>
         </a>
       `;
     }
 
-    // Events
-    // el("q").addEventListener("input", debounce(applyFilters, 150));
-    el("enter").addEventListener("click", applyFilters);
-    el("q").addEventListener("keydown", (e) => { if(e.key === "Enter") applyFilters(); });
-    el("mainCat").addEventListener("change", applyFilters);
-    el("subCat").addEventListener("change", applyFilters);
-    el("reset").addEventListener("click", () => {
-      el("q").value = "";
-      el("mainCat").value = "";
-      el("subCat").value = "";
-      applyFilters();
-    });
-
-    function debounce(fn, delay){
-      let t;
-      return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), delay); };
-    }
-
     function escapeHtml(str){
       return (str ?? "").toString()
-        .replaceAll("&","&amp;").replaceAll("<","&lt;")
-        .replaceAll(">","&gt;").replaceAll('"',"&quot;")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
         .replaceAll("'","&#39;");
     }
     function escapeAttr(str){
