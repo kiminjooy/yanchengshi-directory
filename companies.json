@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generatedAt": "2026-03-30T04:17:52.671Z",
-    "countCompanies": 30
+    "generatedAt": "2026-04-02T07:53:35.678Z",
+    "countCompanies": 31
   },
   "companies": [
     {
@@ -711,6 +711,43 @@
             "3307.90-4000"
           ],
           "meetingRequest": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=e33nR04VpEiTqr8b0aeYhkS3Mjy6ahhJsuPhx_2DMJtURFVGWUw2VUwzUUJYREdDQjk2NFI0U0pRVy4u&rb3aa8247d40c4d33ae227596fa5e6511=怡安化妝品"
+        }
+      ]
+    },
+    {
+      "id": "2208822135",
+      "name": "斯普莱斯",
+      "businessArea": "制造",
+      "channel": "京东、淘宝",
+      "introduction": "SPRX是以\"Short time, Big change\"（短时间，大改变）为口号的减肥保健功能食品专业企业。追求短期内有效的体重管理和健康减肥，提供运用科学验证的功能性原料的创新减肥解决方案。",
+      "links": {
+        "homepage": "https://www.sprx.kr",
+        "catalog": "https://ec210-my.sharepoint.com/:b:/g/personal/kiminjooy_ec21_com/IQD5cL15CYA0Qqbp1jJuNWDOAeWHPBTnBWDZ4oECFBVhtk0?e=gvvNxZ"
+      },
+      "products": [
+        {
+          "id": "2208822135-1",
+          "mainCategory": "食品饮料",
+          "subCategory": "零食 / 休闲食品, 膳食补充剂 / 保健品",
+          "name": "watermix zero/海角冲饮Zero",
+          "detail": "韩国首创零卡路里保健食品认证\n真正的零卡路里配方,在减肥过程中完全没有负担,同时获得国家保健功能食品认证,功效有保障。\n-  双效合一的创新配方\n  减脂功效 - 科学配方帮助减少体内脂肪堆积\n  控糖功效 - 有效抑制餐后血糖快速上升\n- 清爽西柚风味                                                                                                                                                                                                                                                           \n- 简单便捷的饮用方式                                                                                                                                                                                                                                                        冲泡型饮料设计,随时随地轻松饮用。",
+          "xuqiu": "日本",
+          "hscode": [
+            "2106909099"
+          ],
+          "meetingRequest": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=e33nR04VpEiTqr8b0aeYhkS3Mjy6ahhJsuPhx_2DMJtURFVGWUw2VUwzUUJYREdDQjk2NFI0U0pRVy4u&rb3aa8247d40c4d33ae227596fa5e6511=斯普莱斯"
+        },
+        {
+          "id": "2208822135-2",
+          "mainCategory": "",
+          "subCategory": "",
+          "name": "三出(Three Out)",
+          "detail": "这是一款采用专利技术的减肥胶囊。\n\n每日仅需三粒，即可帮助控制碳水化合物、体脂、促进肠道蠕动和能量代谢。\n\n其功效已获得韩国食品药品安全局的认可。\n\n本产品根据亚洲人的饮食习惯研发，旨在辅助减肥并促进肠道健康。",
+          "xuqiu": "日本",
+          "hscode": [
+            "2106909099"
+          ],
+          "meetingRequest": ""
         }
       ]
     },
@@ -1665,66 +1702,6 @@
         }
       ]
     },
-    {
-      "id": "2308108577",
-      "name": "韩诗珐玛",
-      "businessArea": "化妆品制造",
-      "channel": "",
-      "introduction": "以尖端生物科技为基础，引领全球市场的美妆企业——韩诗珐玛。",
-      "links": {
-        "homepage": "http://www.hanspharma.co.kr",
-        "catalog": "https://ec210-my.sharepoint.com/:b:/g/personal/kiminjooy_ec21_com/IQBUun34Kf9vSr72VRApoJoOAQNK8RIczLQFmhytud0y8yM?e=8BrEJL"
-      },
-      "products": [
-        {
-          "id": "2308108577-3",
-          "mainCategory": "",
-          "subCategory": "",
-          "name": "珂莱迪雅光彩保湿精华露 & 美白淡斑精华露",
-          "detail": "当肌肤出现松弛、弹力下降等问题时，可选择 Dia Solution；\r\n当希望改善色斑、暗沉及肤色不均问题时，可选择 Ruby Solution。\r\n\r\n可根据不同肌肤状态与护理需求，进行更具针对性的个性化护理。",
-          "xuqiu": "中东国家",
-          "hscode": [
-            "3304.99"
-          ],
-          "meetingRequest": ""
-        },
-        {
-          "id": "2308108577-4",
-          "mainCategory": "",
-          "subCategory": "",
-          "name": "珂莱迪雅夫西系列",
-          "detail": "Fusicare 系列蕴含 380,000ppm 高浓度土壤微生物发酵提取物 Fusidium Filtrate，能够有效修护受损肌肤屏障，帮助提升肌肤的稳定与健康状态。",
-          "xuqiu": "中东国家",
-          "hscode": [
-            "3304.99"
-          ],
-          "meetingRequest": ""
-        },
-        {
-          "id": "2308108577-2",
-          "mainCategory": "",
-          "subCategory": "",
-          "name": "珂莱迪雅肽幼丽系列",
-          "detail": "Timeless 系列以干细胞培养液（USF 71™）所蕴含的核心修护能量为基础，集补水保湿、提亮肤色与紧致提拉等多重功效于一体，是一款全面覆盖抗老护理需求的高端护肤系列。",
-          "xuqiu": "澳大利亚",
-          "hscode": [
-            "3304.99"
-          ],
-          "meetingRequest": ""
-        },
-        {
-          "id": "2308108577-1",
-          "mainCategory": "美容",
-          "subCategory": "护肤",
-          "name": "珂莱迪雅舒爽头皮安瓶精华液",
-          "detail": "由 Hans Pharma 自主研发的 USF 71™、Ectoine（依克多因）及 SCALFREE-05 Complex™ 复合配方组成，是一款帮助打造健康头皮环境、带来舒缓放松体验的 4 周密集修护安瓶套装。",
-          "xuqiu": "中东国家",
-          "hscode": [
-            "3304.99"
-          ],
-          "meetingRequest": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=e33nR04VpEiTqr8b0aeYhkS3Mjy6ahhJsuPhx_2DMJtURFVGWUw2VUwzUUJYREdDQjk2NFI0U0pRVy4u&rb3aa8247d40c4d33ae227596fa5e6511=韩诗珐玛"
-        }
-      ]
-    }
+
   ]
 }
