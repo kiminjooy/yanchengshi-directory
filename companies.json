@@ -1739,6 +1739,26 @@
             "220890"
           ],
           "meetingRequest": ""
+        },
+         {
+          "id": "6138602832-3",
+          "mainCategory": "",
+          "subCategory": "",
+          "name": "Gim YumYum 海苔零食",
+          "detail": "",
+          "xuqiu": "",
+          "hscode": [],
+          "meetingRequest": ""
+        },
+        {
+          "id": "6138602832-4",
+          "mainCategory": "",
+          "subCategory": "",
+          "name": "Gim YumYum 烤海苔",
+          "detail": "",
+          "xuqiu": "",
+          "hscode": [],
+          "meetingRequest": ""
         }
       ]
     },
